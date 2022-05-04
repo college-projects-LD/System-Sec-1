@@ -17,7 +17,7 @@ app.listen(port, () => {
 app.post('/login', (request,response)=> { //a post request is used by a client to send data to the server
     const loginRequest = request.body; 
     console.log("request.body", request.body);
-    if (loginRequest.userName === "landondelaney@byui.edu" && loginRequest.password === "KJhgfdsa123!") {
+    if (loginRequest.userName === "landondelaney@byui.edu" && loginRequest.password === "KJhgfdsa123") {
         response.status(200);
         response.send("Welcome");
 
