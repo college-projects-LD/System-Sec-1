@@ -12,14 +12,14 @@ socket:{
     host: '127.0.0.1'
 }
 
-}//for things with promis you need to add an await
+}//for things with promis you need to add an await while in an function that is asynced
 );
 
-redisClient.connect();// make the TCP connection to the redis server
 
 app.use(bodyParser.json());// use the middleware
 
-app.listen(port, async, () => {
+app.listen(port, async () => {
+    await redisClient.connect();// make the TCP connection to the redis server
     console.log(`Server is listening on port ${port}`);}
     );
 
@@ -49,3 +49,20 @@ app.get('/', (request, response) => {
 });
 
 app.post('/login', validatePassword);
+
+
+const signup = (request, response)=>{
+    // make a hmset command to add the username and password to the database
+    const requestnewHashedPassword = md5(request.body.password);
+    var exists = redisClient.hExists('passwords', request.body.userName);
+    console.log("exists",exists);
+    if(exists){
+        response.status(409);
+        response.send(`${request.body.userName} already exists`);
+    }
+    else{
+    redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
+    response.status(200);
+    response.send("Complete")};
+};
+app.post('/signup',signup);
