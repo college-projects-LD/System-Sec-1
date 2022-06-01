@@ -66,3 +66,8 @@ const signup = (request, response)=>{
     response.send("Complete")};
 };
 app.post('/signup',signup);
+app.get('/',(request,response)=>{
+    hmset (ussername,password);});
+
+    app.post('/signup',signup);
+    app.post('/login',validatePassword);
