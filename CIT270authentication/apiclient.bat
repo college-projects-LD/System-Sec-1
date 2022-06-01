@@ -1,1 +1,1 @@
-curl -d "@data.json" -X POST -H "Content-Type:application/json" http://localhost:3000/signup
+curl -d "@data.json" -X POST -H -K "Content-Type:application/json" https://localhost:3000/signup

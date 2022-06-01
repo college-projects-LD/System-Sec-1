@@ -1,8 +1,9 @@
 const express = require('express');
-
+const https = require('https');
 const port = 3000;
 const app = express();
 const md5 = require('md5');
+const fs = require('fs');
 
 const bodyParser = require('body-parser');
 const {createClient} = require('redis');
@@ -18,10 +19,17 @@ socket:{
 
 app.use(bodyParser.json());// use the middleware
 
-app.listen(port, async () => {
-    await redisClient.connect();// make the TCP connection to the redis server
-    console.log(`Server is listening on port ${port}`);}
-    );
+// use the https module to create a secure server useing the correct key and cert
+https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+}, app).listen(port, ()=>{
+    console.log(`listening on port ${port}`);
+});
+
+
+
+
 
 // read a password from redis 
 const validatePassword = async (request, response)=>{
