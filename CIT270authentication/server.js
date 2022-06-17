@@ -7,23 +7,17 @@ const fs = require('fs');
 
 const bodyParser = require('body-parser');
 const {createClient} = require('redis');
-const redisClient = createClient({
-socket:{
-    port: 6379,
-    host: '127.0.0.1'
-}
-
-}//for things with promis you need to add an await while in an function that is asynced
-);
-
-
+const client = createClient({ url: 'redis://default@10.128.0.2:6379', });
+const Exapp = express();
 app.use(bodyParser.json());// use the middleware
 
 // use the https module to create a secure server useing the correct key and cert
 https.createServer({
     key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
-}, app).listen(port, ()=>{
+    cert: fs.readFileSync('server.cert'),
+    passphrase:'P@ssw0rd',
+}, app).listen(port, async ()=>{
+    await redisClient.connect();
     console.log(`listening on port ${port}`);
 });
 
@@ -34,7 +28,7 @@ https.createServer({
 // read a password from redis 
 const validatePassword = async (request, response)=>{
     const requestHashedPassword = md5(request.body.password); //get the passwprd from the request and hash it
-    const redisHashedPassword = await redisClient.hmGet('passwords',request.body.userName); //get the hash from redis
+    const redisHashedPassword = await redisClient.hGet('passwords',request.body.userName); //get the hash from redis
     const loginRequest = request.body;
     console.log("request Body",JSON.stringify(request.body));
     //search the database for the username, if it exists, get the password
@@ -59,7 +53,7 @@ app.get('/', (request, response) => {
 app.post('/login', validatePassword);
 
 
-const signup = (request, response)=>{
+const signup = async (request, response)=>{
     // make a hmset command to add the username and password to the database
     const requestnewHashedPassword = md5(request.body.password);
     var exists = redisClient.hExists('passwords', request.body.userName);
