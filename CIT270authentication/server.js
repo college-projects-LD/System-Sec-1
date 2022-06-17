@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const bodyParser = require('body-parser');
 const {createClient} = require('redis');
-const client = createClient({ url: 'redis://default@10.128.0.2:6379', });
+const redisClient = createClient({ url: 'redis://default@10.128.0.2:6379', });
 const Exapp = express();
 app.use(bodyParser.json());// use the middleware
 
