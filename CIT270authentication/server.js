@@ -1,6 +1,6 @@
 const express = require('express');
 const https = require('https');
-const port = 3000;
+const port = 6379;
 const app = express();
 const md5 = require('md5');
 const fs = require('fs');
