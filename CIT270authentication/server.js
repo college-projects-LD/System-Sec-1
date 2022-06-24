@@ -54,7 +54,7 @@ app.post('/login', validatePassword);
 
 
 const signup = async (request, response)=>{
-    // make a hmset command to add the username and password to the database
+    // make a hset command to add the username and password to the database
     const requestnewHashedPassword = md5(request.body.password);
     var exists = await redisClient.hExists('passwords', request.body.userName);
     console.log("exists",exists);
@@ -63,14 +63,14 @@ const signup = async (request, response)=>{
        // response.send(`${request.body.userName} already exists`);
     //}
     //else
-    {
+    
    await  redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
     response.status(200);
-    response.send("Complete")};
+    response.send("Complete");
 };
 
 app.get('/',(request,response)=>{
     hset (username,password);});
 
     app.post('/signup',signup);
-    app.post('/login',validatePassword);
+    app.post('/login',validatePassword); 
