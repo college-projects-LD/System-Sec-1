@@ -64,11 +64,11 @@ const signup = async (request, response)=>{
    // }
     //else
     {
-   await  redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
+   await  redisClient.hmSet('passwords',request.body.userName,requestnewHashedPassword);
     response.status(200);
     response.send("Complete")};
 };
-app.post('/signup',signup);
+
 app.get('/',(request,response)=>{
     hset (username,password);});
 
