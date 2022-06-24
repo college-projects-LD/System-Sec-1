@@ -67,6 +67,7 @@ const signup = async (request, response)=>{
    await  redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
     response.status(200);
     response.send("Complete");
+    console.log("request Body",JSON.stringify(request.body));
 };
 
 
