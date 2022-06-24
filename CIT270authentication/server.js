@@ -56,7 +56,7 @@ app.post('/login', validatePassword);
 const signup = async (request, response)=>{
     // make a hmset command to add the username and password to the database
     const requestnewHashedPassword = md5(request.body.password);
-    var exists = redisClient.hExists('passwords', request.body.userName);
+    var exists = await redisClient.hExists('passwords', request.body.userName);
     console.log("exists",exists);
     //if(exists){
       //  response.status(409);
@@ -64,7 +64,7 @@ const signup = async (request, response)=>{
    // }
     //else
     {
-    redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
+   await  redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
     response.status(200);
     response.send("Complete")};
 };

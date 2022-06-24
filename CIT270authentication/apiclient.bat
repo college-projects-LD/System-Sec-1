@@ -1,1 +1,1 @@
-curl --insecure -d "@data.json" -X POST -H "Content-Type:application/json" https://landondelaney-nodejs.cit270.com/signup
+curl --insecure -d "@data.json" -X POST -H "Content-Type:application/json" 127.0.0.1:443/signup
