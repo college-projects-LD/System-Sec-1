@@ -58,11 +58,12 @@ const signup = async (request, response)=>{
     const requestnewHashedPassword = md5(request.body.password);
     var exists = redisClient.hExists('passwords', request.body.userName);
     console.log("exists",exists);
-    if(exists){
-        response.status(409);
-        response.send(`${request.body.userName} already exists`);
-    }
-    else{
+    //if(exists){
+      //  response.status(409);
+        //response.send(`${request.body.userName} already exists`);
+   // }
+    //else
+    {
     redisClient.hSet('passwords',request.body.userName,requestnewHashedPassword);
     response.status(200);
     response.send("Complete")};
