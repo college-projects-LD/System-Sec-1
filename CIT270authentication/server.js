@@ -69,7 +69,7 @@ const signup = async (request, response)=>{
 };
 app.post('/signup',signup);
 app.get('/',(request,response)=>{
-    hmset (ussername,password);});
+    hset (ussername,password);});
 
     app.post('/signup',signup);
     app.post('/login',validatePassword);
