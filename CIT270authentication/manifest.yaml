@@ -26,17 +26,17 @@ spec:
             requests:
               cpu: ".1"
               memory: "250Mi"
-            livenessProbe:
-              httpGet:
-                path: /
-                port: 443
-              initialDelaySeconds: 3
-              periodSeconds: 3
-            readinessProbe:
-              httpGet: 
-                path: /
-                port: 443
-              initialDelaySeconds: 3
-              periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 443
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet: 
+              path: /
+              port: 443
+            initialDelaySeconds: 3
+            periodSeconds: 3
 
 
