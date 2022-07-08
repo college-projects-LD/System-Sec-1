@@ -13,7 +13,7 @@ spec:
         app: landon-dep
     spec: 
       containers:
-        - name: landon_dep
+        - name: landon-dep
           image: landondelaney/cit270
           command: ["npm"]
           args: ["run", "start"]
