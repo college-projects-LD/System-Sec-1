@@ -40,3 +40,17 @@ spec:
             periodSeconds: 3
 
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: landon-loadbalancer
+spec:
+  selector:
+    app: landon-dep
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+
+
