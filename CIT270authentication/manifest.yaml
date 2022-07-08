@@ -5,38 +5,38 @@ metadata:
 spec:
   replicas: 1
   selector: 
-      matchLabels:
-        app: landon-dep
-      template: 
-        metadata: 
-          labels:
-            app: landon_dep
-        spec: 
-          containers:
-            - name: landon_dep
-              image: landondelaney/cit270
-              command: ["npm"]
-              args: ["run", "start"]
-              ports:
-                - containers: 443
-              resources:
-                limits:
-                cpu: ".125"
-                memory: "500Mi"
-              requests:
-                cpu: ".1"
-                memory: "250Mi"
-              livenessProbe:
-                httpget:
+    matchLabels:
+      app: landon-dep
+  template: 
+    metadata: 
+      labels:
+        app: landon_dep
+    spec: 
+      containers:
+        - name: landon_dep
+          image: landondelaney/cit270
+          command: ["npm"]
+          args: ["run", "start"]
+          ports:
+            - containerPort: 443
+          resources:
+            limits:
+              cpu: ".125"
+              memory: "500Mi"
+            requests:
+              cpu: ".1"
+              memory: "250Mi"
+            livenessProbe:
+              httpget:
+              path: /
+              port: 443
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            readinessProbe:
+              httpget: 
                 path: /
                 port: 443
               initialDelaySeconds: 3
               periodSeconds: 3
-              readinessProbe:
-                httpget: 
-                  path: /
-                  port: 443
-                initialDelaySeconds: 3
-                periodSeconds: 3
 
 
