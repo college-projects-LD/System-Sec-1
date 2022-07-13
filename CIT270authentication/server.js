@@ -1,6 +1,6 @@
 const express = require('express');
 const https = require('https');
-const port = 443;
+const port = 3000;
 const app = express();
 const md5 = require('md5');
 const fs = require('fs');
@@ -12,17 +12,20 @@ const Exapp = express();
 app.use(bodyParser.json());// use the middleware
 
 // use the https module to create a secure server useing the correct key and cert
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert'),
-    passphrase:'P@ssw0rd',
-}, app).listen(port, async ()=>{
+// https.createServer({
+//     key: fs.readFileSync('server.key'),
+//     cert: fs.readFileSync('server.cert'),
+//     passphrase:'P@ssw0rd',
+// }, app).listen(port, async ()=>{
+//     await redisClient.connect();
+//     console.log(`listening on port ${port}`);
+// });
+
+
+app.listen(port, async()=>{
     await redisClient.connect();
-    console.log(`listening on port ${port}`);
+    console.log(`listening on port: ${port}`);
 });
-
-
-
 
 
 // read a password from redis 
