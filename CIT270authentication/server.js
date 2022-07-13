@@ -50,7 +50,7 @@ app.get('/', (request, response) => {
     response.send('Hello');
 });
 
-app.post('/login', validatePassword);
+//app.post('/login', validatePassword);
 
 
 const signup = async (request, response)=>{
