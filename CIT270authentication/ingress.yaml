@@ -1,0 +1,22 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: landon-dep-ingress
+  namespace: landon-dep
+  annotations:
+    nginx.ingress.kubernetes.io/rewright-target: /
+    kubernetes.ioo/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+spec:
+  tls:
+  - hosts:
+    - landondelaney-kubenodejs.cit270.com
+    secretName: landon-dep-dev-tls
+  rules:
+  - host: landondelaney-kubenodejs.cit270.com
+    http: 
+      paths:
+      - backend:
+          serviceName: landon-loadbalancer
+          servicePort: 80
